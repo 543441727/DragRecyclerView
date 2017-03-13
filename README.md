@@ -1,0 +1,3 @@
+# DragRecyclerView
+可拖拽的RecyclerView
+使用RecyclerView结合ItemTouchHelper实现可拖拽的RecyclerView ，效果图如下：

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mLiLayoutInflater.inflate(R.layout.item_grid, parent, false));
+        return new ViewHolder(mLiLayoutInflater.inflate(R.layout.item_linear, parent, false));
     }
 
     @Override
@@ -47,12 +48,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
         ImageView img;
+        LinearLayout ll_item, ll_hidden;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             img = (ImageView) itemView.findViewById(R.id.img);
 
+            ll_item = (LinearLayout) itemView.findViewById(R.id.ll_item);
+            ll_hidden = (LinearLayout) itemView.findViewById(R.id.ll_hidden);
         }
     }
 }

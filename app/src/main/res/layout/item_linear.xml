@@ -3,24 +3,49 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
+              android:id="@+id/ll_item"
     >
 
-    <TextView
-        android:layout_marginLeft="5dp"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:id="@+id/tv_title"
-        android:textSize="16dp"
-        android:text="我是标题"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_category_0"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:text="我是标题"
+            android:textSize="16dp"/>
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/ic_category_0"
+            />
+    </LinearLayout>
+
+    <!-- 屏幕右侧外边部分，正常时在屏幕中处于不可见 -->
+    <LinearLayout
+        android:id="@+id/ll_hidden"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="#ff0000"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/tv_item_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
 </LinearLayout>

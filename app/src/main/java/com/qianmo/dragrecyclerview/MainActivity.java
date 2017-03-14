@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static android.R.attr.data;
 import static com.qianmo.dragrecyclerview.R.id.recyclerView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Context mContext = MainActivity.this;
-    private RecyclerView mRecyclerView;
+    private SwipeRecyclerView mRecyclerView;
 
     private String[] titles = {"美食", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "机票/火车票", "周边游", "美甲美睫",
             "火锅", "生日蛋糕", "甜品饮品", "水上乐园", "汽车服务", "美发", "丽人", "景点", "足疗按摩", "运动健身", "健身", "超市", "买菜",
@@ -50,17 +51,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mRecyclerView = (RecyclerView) findViewById(recyclerView);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
+        mRecyclerView = (SwipeRecyclerView) findViewById(recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+//        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+//        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         myAdapter = new MyAdapter(datas, mContext);
         mRecyclerView.setAdapter(myAdapter);
         mRecyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(mRecyclerView) {
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh) {
-
                 Toast.makeText(mContext, datas.get(vh.getLayoutPosition()).getTitle(), Toast.LENGTH_SHORT).show();
             }
 
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
                     final int swipeFlags = 0;
+//                    final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
                     return makeMovementFlags(dragFlags, swipeFlags);
                 }
             }
@@ -121,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
+//                int position = viewHolder.getAdapterPosition();
+//                myAdapter.notifyItemRemoved(position);
+//                datas.remove(position);
             }
 
             /**
@@ -160,5 +163,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+        mRecyclerView.setRightClickListener(new SwipeRecyclerView.OnRightClickListener() {
+            @Override
+            public void onRightClick(int position, String id) {
+                datas.remove(position);
+//                myAdapter.notifyItemRemoved(position);
+                myAdapter.notifyDataSetChanged();
+                Toast.makeText(mContext, " position = " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
